@@ -22,6 +22,12 @@ export class VideoViewComponent implements OnInit {
     this.player.getVideoStream().subscribe((video: string) => {
       this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video}?autoplay=1`);
     })
+
+    setInterval(() => {
+      var iframe: any = document.getElementById("player");
+      var ytplayer = iframe.contentWindow.document.getElementById("movie_player");
+      console.log(ytplayer.getCurrentTime());
+    }, 250);
   }
 
 }
