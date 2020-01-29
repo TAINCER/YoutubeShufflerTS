@@ -22,6 +22,10 @@ export class ControlElementsComponent implements OnInit {
     });
   }
 
+  updatePlayerConfig(isAutoplay: boolean, isLoop: boolean): void {
+    this.player.setConfig(isAutoplay, isLoop);
+  }
+
   copyUrl() {
 
     var el: any = document.createElement('textarea');
