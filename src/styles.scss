@@ -4,3 +4,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden;}
+
+button:active,
+button:focus,
+button:hover {
+    outline: 0;
+}
