@@ -20,14 +20,17 @@ export class VideoViewComponent implements OnInit {
     this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl('https://api.csgoplexus.com/plexus/index.html');
 
     this.player.getVideoStream().subscribe((video: string) => {
-      this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video}?autoplay=1`);
-    })
+      let url: string = `https://www.youtube.com/embed/${video}?autoplay=1`;
 
-    setInterval(() => {
-      var iframe: any = document.getElementById("player");
-      var ytplayer = iframe.contentWindow.document.getElementById("movie_player");
-      console.log(ytplayer.getCurrentTime());
-    }, 250);
+      if (this.player.getConfig().loop) {
+        url += '&loop=1';
+        url += `&playlist=${video}`;
+      } else {
+        url += '&loop=0';
+      }
+
+      this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(url);
+    })
   }
 
 }
