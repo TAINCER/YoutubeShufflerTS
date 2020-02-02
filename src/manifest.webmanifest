@@ -1,8 +1,8 @@
 {
   "name": "youtubeShufflerTS",
   "short_name": "youtubeShufflerTS",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#171e22",
+  "background_color": "#171e22",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
