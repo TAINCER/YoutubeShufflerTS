@@ -2,8 +2,26 @@
 
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden;}
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin          : 0;
+    font-family     : Roboto, "Helvetica Neue", sans-serif;
+    overflow        : hidden;
+    background-color: #171e22;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+    color: #ffff;
+}
 
 button:active,
 button:focus,
