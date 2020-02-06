@@ -1,8 +1,13 @@
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
     const axios = require('axios');
     const { videoId } = req.query;
     const apiKey = 'AIzaSyBDso4jJrCUzrs7yjudTO__cUtFUHOg2mY';
     const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=contentDetails,statistics&key=${apiKey}`;
-    const result = await axios.get(url);
-    res.status(200).json(result)
+    axios.get(url)
+    .then(response => {
+        res.status(200).json(response);
+      })
+      .catch(error => {
+        res.status(500).send(error.message);
+      })
 }
