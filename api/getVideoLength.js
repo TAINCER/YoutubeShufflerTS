@@ -1,3 +1,3 @@
 module.exports = (req, res) => {
-    res.status(200).json({hey: 'there'});
+    res.status(200).send(`Hello!`)
 }
