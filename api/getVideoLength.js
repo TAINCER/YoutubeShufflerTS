@@ -12,6 +12,6 @@ module.exports = (req, res) => {
         .catch(error => {
             console.log("error");
             
-            res.status(500).send(error);
+            res.status(418).send(error);
         })
 }
