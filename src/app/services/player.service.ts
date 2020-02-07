@@ -1,5 +1,7 @@
-import {Injectable, Output, EventEmitter} from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { PlayerConfig } from '../interfaces/player-config';
+import { HttpClient } from '@angular/common/http';
+import { Noembed } from '../interfaces/noembed';
 
 
 
@@ -16,12 +18,16 @@ export class PlayerService {
 
   private currentVideo: string;
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
 
-  public nextVideo() {
+  public async nextVideo() {
     const localVideos: string[] = this.getVideosFromDisk();
     const video: string = localVideos[this.getRandomInt(0, localVideos.length)];
+
+    this.setWindowTitle(await this.getVideoTitle(video));
 
     this.currentVideo = video;
     this.fire.emit(video);
@@ -31,6 +37,18 @@ export class PlayerService {
     return this.fire;
   }
 
+  public async getVideoTitle(videoId: string): Promise<string> {
+    return await new Promise((resolve, reject) => {
+      this.httpClient.get<Noembed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`).subscribe(res => {
+        resolve(res.title);
+      });
+    });
+  }
+
+  public setWindowTitle(title: string) {
+    document.title = title;
+  }
+  
   public getVideosFromDisk(): string[] {
     if (localStorage.getItem('videos') === null) {
       return [];
@@ -56,5 +74,5 @@ export class PlayerService {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+  }
 }
