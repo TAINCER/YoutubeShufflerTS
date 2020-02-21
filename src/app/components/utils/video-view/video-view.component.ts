@@ -19,7 +19,9 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.videoPlayer = new Plyr('#player', {
-      autoplay: true
+      autoplay: true,
+      muted: true,
+      loop: { active: false }
     });
 
     this.videoPlayer.on('ready', () => {
@@ -30,7 +32,9 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
     })
 
     this.videoPlayer.on('ended', () => {
-      this.playerService.nextVideo();
+      if (this.playerService.getConfig().autoplay) {
+        this.playerService.nextVideo();
+      }
     })
   }
 
@@ -39,6 +43,9 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
 
       if (typeof (video) !== 'undefined') {
         this.loading = false;
+
+        this.videoPlayer.loop = this.playerService.getConfig().loop;
+        this.videoPlayer.muted = false;
         
         this.videoPlayer.source = {
           type: 'video',

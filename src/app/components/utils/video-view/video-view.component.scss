@@ -6,3 +6,16 @@ iframe {
 #player {
     height: 100vh;
 }
+
+.showLoading {
+    width: 100%;
+    height: 100vh;;
+    background-color: #171e22;
+    z-index: 999999;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
