@@ -17,7 +17,7 @@ export class VideoViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl('https://api.csgoplexus.com/plexus/index.html');
+    this.currentVideo;
 
     this.player.getVideoStream().subscribe((video: string) => {
       let url: string = `https://www.youtube.com/embed/${video}?autoplay=1`;
@@ -29,8 +29,14 @@ export class VideoViewComponent implements OnInit {
         url += '&loop=0';
       }
 
-      this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(url);
-    })
+      if (typeof(video) === 'undefined') {
+        this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl('https://google.com');
+      } else {
+        this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(url);
+      }
+    });
+
+    this.player.refresh();
   }
 
 }
