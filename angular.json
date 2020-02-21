@@ -32,7 +32,9 @@
               "./src/matStyle.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plyr.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -100,7 +102,9 @@
               "./src/matStyle.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plyr.min.js"
+            ]
           }
         },
         "lint": {
