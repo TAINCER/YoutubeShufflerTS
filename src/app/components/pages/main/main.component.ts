@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     window.resizeTo(880, 450);
+    window.scrollTo(0, 0);
 
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'hidden';
   }
