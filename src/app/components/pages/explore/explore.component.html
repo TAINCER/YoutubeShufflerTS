@@ -1,0 +1,18 @@
+<div>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Thumbnail</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let video of allVideos">
+          <tr>
+            <th scope="row">{{ video.id }}</th>
+            <td (click)="setVideo(video)">{{ video.title }}</td>
+            <td><img width="64px" height="64px" [src]="video.thumbnail" alt=""></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

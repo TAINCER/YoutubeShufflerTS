@@ -17,10 +17,12 @@ import { ImportComponent } from './components/pages/import/import.component';
 import { MainComponent } from './components/pages/main/main.component';
 import { ControlElementsComponent } from './components/utils/control-elements/control-elements.component';
 import { VideoViewComponent } from './components/utils/video-view/video-view.component';
+import { ExploreComponent } from './components/pages/explore/explore.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'import', component: ImportComponent }
+  { path: 'import', component: ImportComponent },
+  { path: 'explore', component: ExploreComponent }
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     ImportComponent,
     MainComponent,
     ControlElementsComponent,
-    VideoViewComponent
+    VideoViewComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,
