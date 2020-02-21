@@ -18,6 +18,9 @@ export class BottomButtonComponent {
     if (e.ctrlKey) {
       this.router.navigate(['/import']);
       return;
+    } else if (e.altKey) {
+      this.router.navigate(['/explore']);
+      return;
     }
 
     this.player.nextVideo();
