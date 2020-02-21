@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
