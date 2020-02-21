@@ -1,42 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+declare var Plyr: any;
 
 @Component({
   selector: 'app-video-view',
   templateUrl: './video-view.component.html',
   styleUrls: ['./video-view.component.scss']
 })
-export class VideoViewComponent implements OnInit {
+export class VideoViewComponent implements OnInit, AfterViewInit {
 
-  public currentVideo: SafeUrl;
+  private videoPlayer: any;
+  private isLoaded: boolean = false;
+  public loading: boolean = true;
 
   constructor(
-    private player: PlayerService,
-    private sanizizer: DomSanitizer
+    private playerService: PlayerService,
   ) { }
 
-  ngOnInit() {
-    this.currentVideo;
-
-    this.player.getVideoStream().subscribe((video: string) => {
-      let url: string = `https://www.youtube.com/embed/${video}?autoplay=1`;
-
-      if (this.player.getConfig().loop) {
-        url += '&loop=1';
-        url += `&playlist=${video}`;
-      } else {
-        url += '&loop=0';
-      }
-
-      if (typeof(video) === 'undefined') {
-        this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl('https://google.com');
-      } else {
-        this.currentVideo = this.sanizizer.bypassSecurityTrustResourceUrl(url);
-      }
+  ngAfterViewInit() {
+    this.videoPlayer = new Plyr('#player', {
+      autoplay: true
     });
 
-    this.player.refresh();
+    this.videoPlayer.on('ready', () => {
+      if (!this.isLoaded) {
+        this.isLoaded = true;
+        this.playerService.refresh();
+      }
+    })
+
+    this.videoPlayer.on('ended', () => {
+      this.playerService.nextVideo();
+    })
+  }
+
+  ngOnInit() {
+    this.playerService.getVideoStream().subscribe((video: string) => {
+
+      if (typeof (video) !== 'undefined') {
+        this.loading = false;
+        
+        this.videoPlayer.source = {
+          type: 'video',
+          sources: [
+            {
+              src: video,
+              provider: 'youtube'
+            }
+          ]
+        };
+      }
+
+    });
   }
 
 }

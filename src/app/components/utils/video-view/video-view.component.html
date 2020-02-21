@@ -1,2 +1,15 @@
-<iframe id="player" width="560" height="315" [src]="currentVideo" frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!--iframe id="player" width="560" height="315" [src]="currentVideo" frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
+<div class="plyr__video-embed" id="player">
+    <iframe
+        src="https://www.youtube.com/watch?v=bHscSXzQt60?loop=1"
+        allowfullscreen
+        frameborder="0"
+        allowtransparency
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    ></iframe>
+</div>
+
+<div *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
