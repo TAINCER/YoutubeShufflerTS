@@ -2,6 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { PlayerConfig } from '../interfaces/player-config';
 import { HttpClient } from '@angular/common/http';
 import { Noembed } from '../interfaces/noembed';
+import { IVideo } from '../interfaces/ivideo';
 
 
 
@@ -24,24 +25,33 @@ export class PlayerService {
 
 
   public async nextVideo() {
-    const localVideos: string[] = this.getVideosFromDisk();
-    const video: string = localVideos[this.getRandomInt(0, localVideos.length)];
+    const localVideos: IVideo[] = this.getVideosFromDisk();
+    const video: string = localVideos[this.getRandomInt(0, localVideos.length)].id;
 
-    this.setWindowTitle(await this.getVideoTitle(video));
+    this.setWindowTitle((await this.getVideoInformation(video)).title);
 
     this.currentVideo = video;
     this.fire.emit(video);
+  }
+
+  public refresh() {
+    this.fire.emit(this.currentVideo);
+  }
+
+  public setVideo(video: IVideo) {
+    this.setWindowTitle(video.title);
+    this.currentVideo = video.id;
+    this.fire.emit(video.id);
   }
 
   public getVideoStream(): EventEmitter<string> {
     return this.fire;
   }
 
-  public async getVideoTitle(videoId: string): Promise<string> {
+  public async getVideoInformation(videoId: string): Promise<Noembed> {
     return await new Promise((resolve, reject) => {
-      this.httpClient.get<Noembed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`).subscribe(res => {
-        resolve(res.title);
-      });
+      this.httpClient.get<Noembed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+      .subscribe(res => resolve(res) );
     });
   }
 
@@ -49,7 +59,7 @@ export class PlayerService {
     document.title = title;
   }
   
-  public getVideosFromDisk(): string[] {
+  public getVideosFromDisk(): IVideo[] {
     if (localStorage.getItem('videos') === null) {
       return [];
     }
