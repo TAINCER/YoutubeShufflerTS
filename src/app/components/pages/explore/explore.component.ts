@@ -21,7 +21,7 @@ export class ExploreComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    window.resizeTo(880, 1000);
+    window.resizeTo(1280, 720);
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'scroll';
     
     this.allVideos = this.playerService.getVideosFromDisk();
