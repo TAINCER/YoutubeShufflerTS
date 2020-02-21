@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InputReaderService } from 'src/app/services/input-reader.service';
+import { IVideo } from 'src/app/interfaces/ivideo';
 
 @Component({
   selector: 'app-import',
@@ -23,7 +24,7 @@ export class ImportComponent implements OnInit {
     const regex = /https:\/\/www\.youtube\.com\/watch\?v=([-a-zA-Z0-9_!"$%]){11}/gm;
 
     let m;
-    const l: string[] = [];
+    const l: IVideo[] = [];
 
     while ((m = regex.exec(videos)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
@@ -35,7 +36,11 @@ export class ImportComponent implements OnInit {
         // The result can be accessed through the `m`-variable.
         m.forEach((match, groupIndex) => {
             if (groupIndex === 0) {
-              l.push(match.split('=')[match.split('=').length - 1])
+              l.push({
+                id: match.split('=')[match.split('=').length - 1],
+                thumbnail: null,
+                title: null
+              })
             }
         });
     }
