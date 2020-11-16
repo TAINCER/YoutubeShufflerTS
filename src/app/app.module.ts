@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatButtonModule,
     MatCheckboxModule,
-    RouterModule.forRoot(appRoutes, { useHash: true }),
+    RouterModule.forRoot(appRoutes, { useHash: true, relativeLinkResolution: 'legacy' }),
     HttpClientModule,
     MatProgressSpinnerModule,
     MatProgressBarModule
