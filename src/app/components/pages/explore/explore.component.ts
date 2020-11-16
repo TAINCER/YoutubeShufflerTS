@@ -25,6 +25,7 @@ export class ExploreComponent implements OnInit {
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'scroll';
     
     this.allVideos = this.playerService.getVideosFromDisk();
+    /**
     console.log();
     const videosToProcess: IVideo[] = this.allVideos.filter((v: IVideo) => v.thumbnail === null && v.title === null);
     console.log(videosToProcess.length);
@@ -36,7 +37,7 @@ export class ExploreComponent implements OnInit {
       console.log(`${videosToProcess[i].id} Done`);
       
     }
-    
+     */
     
   }
 

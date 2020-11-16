@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -19,11 +20,14 @@ import { MainComponent } from './components/pages/main/main.component';
 import { ControlElementsComponent } from './components/utils/control-elements/control-elements.component';
 import { VideoViewComponent } from './components/utils/video-view/video-view.component';
 import { ExploreComponent } from './components/pages/explore/explore.component';
+import { PreloadComponent } from './components/pages/import/preload/preload.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent },
   { path: 'import', component: ImportComponent },
-  { path: 'explore', component: ExploreComponent }
+  { path: 'explore', component: ExploreComponent },
+  { path: 'import/preload', component: PreloadComponent }
+  
 ];
 
 @NgModule({
@@ -34,7 +38,8 @@ const appRoutes: Routes = [
     MainComponent,
     ControlElementsComponent,
     VideoViewComponent,
-    ExploreComponent
+    ExploreComponent,
+    PreloadComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InputReaderService } from 'src/app/services/input-reader.service';
 import { IVideo } from 'src/app/interfaces/ivideo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-import',
@@ -10,7 +11,8 @@ import { IVideo } from 'src/app/interfaces/ivideo';
 export class ImportComponent implements OnInit {
 
   constructor(
-    private inputReaderService: InputReaderService
+    private inputReaderService: InputReaderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,8 @@ export class ImportComponent implements OnInit {
     }
 
     this.inputReaderService.saveInput(l);
+
+    this.router.navigate(['/import/preload']);
   }
 
 }

@@ -1,0 +1,9 @@
+<div class="main container text-center">
+    <div class="wrapper">
+        <ng-container *ngIf="lastVideo">
+            <h4>Preloading Videos...</h4>
+            <p >Last Video: {{ lastVideo.title }}</p>
+        </ng-container>
+        <mat-progress-bar mode="determinate" [value]="processValue"></mat-progress-bar>
+    </div>
+</div>
