@@ -13,7 +13,7 @@ export class InputReaderService {
   }
 
   async saveInputAsync(videos: IVideo[]) {
-    return await new Promise((resolve, reject) => {
+    return await new Promise<void>((resolve, reject) => {
       this.saveInput(videos);
       resolve();
     })
