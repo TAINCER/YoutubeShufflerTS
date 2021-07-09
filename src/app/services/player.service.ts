@@ -10,17 +10,15 @@ import { INoEmbed } from '../interfaces/INoEmbed';
 export class PlayerService {
   @Output() fire: EventEmitter<string> = new EventEmitter();
 
+  private currentVideo: string;
   private config: IPlayerConfig = {
     autoplay: false,
     loop: false
   };
 
-  private currentVideo: string;
-
   constructor(
     private httpClient: HttpClient
   ) { }
-
 
   public async nextVideo() {
     const localVideos: IVideo[] = this.getVideosFromDisk();
@@ -47,10 +45,9 @@ export class PlayerService {
   }
 
   public async getVideoInformation(videoId: string): Promise<INoEmbed> {
-    return await new Promise((resolve, reject) => {
-      this.httpClient.get<INoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
-        .subscribe(res => resolve(res));
-    });
+    return await this.httpClient
+      .get<INoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+      .toPromise();
   }
 
   public setWindowTitle(title: string) {
