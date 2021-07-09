@@ -1,8 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IVideo } from '../interfaces/IVideo';
-import { IPlayerConfig } from '../interfaces/IPlayerConfig';
-import { INoEmbed } from '../interfaces/INoEmbed';
+import { Video } from '../interfaces/Video';
+import { PlayerConfig } from '../interfaces/PlayerConfig';
+import { NoEmbed } from '../interfaces/NoEmbed';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class PlayerService {
   @Output() fire: EventEmitter<string> = new EventEmitter();
 
   private currentVideo: string;
-  private config: IPlayerConfig = {
+  private config: PlayerConfig = {
     autoplay: false,
     loop: false
   };
@@ -21,7 +21,7 @@ export class PlayerService {
   ) { }
 
   public async nextVideo() {
-    const localVideos: IVideo[] = this.getVideosFromDisk();
+    const localVideos: Video[] = this.getVideosFromDisk();
     const video: string = localVideos[this.getRandomInt(0, localVideos.length)].id;
 
     this.setWindowTitle((await this.getVideoInformation(video)).title);
@@ -34,7 +34,7 @@ export class PlayerService {
     this.fire.emit(this.currentVideo);
   }
 
-  public setVideo(video: IVideo) {
+  public setVideo(video: Video) {
     this.setWindowTitle(video.title);
     this.currentVideo = video.id;
     this.fire.emit(video.id);
@@ -44,9 +44,9 @@ export class PlayerService {
     return this.fire;
   }
 
-  public async getVideoInformation(videoId: string): Promise<INoEmbed> {
+  public async getVideoInformation(videoId: string): Promise<NoEmbed> {
     return await this.httpClient
-      .get<INoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+      .get<NoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
       .toPromise();
   }
 
@@ -54,7 +54,7 @@ export class PlayerService {
     document.title = title;
   }
 
-  public getVideosFromDisk(): IVideo[] {
+  public getVideosFromDisk(): Video[] {
     if (localStorage.getItem('videos') === null) {
       return [];
     }
@@ -71,7 +71,7 @@ export class PlayerService {
     this.fire.emit(this.currentVideo);
   }
 
-  public getConfig(): IPlayerConfig {
+  public getConfig(): PlayerConfig {
     return this.config;
   }
 

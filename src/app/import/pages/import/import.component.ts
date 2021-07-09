@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InputReaderService } from 'src/app/shared/services/input-reader.service';
-import { IVideo } from 'src/app/shared/interfaces/IVideo';
+import { Video } from 'src/app/shared/interfaces/Video';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class ImportComponent implements OnInit {
     const regex = /https:\/\/www\.youtube\.com\/watch\?v=([-a-zA-Z0-9_!"$%]){11}/gm;
 
     let m;
-    const l: IVideo[] = [];
+    const l: Video[] = [];
 
     while ((m = regex.exec(videos)) !== null) {
       // This is necessary to avoid infinite loops with zero-width matches
