@@ -14,30 +14,22 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { BottomButtonComponent } from './components/utils/bottom-button/bottom-button.component';
 import { ImportComponent } from './components/pages/import/import.component';
-import { MainComponent } from './components/pages/main/main.component';
-import { ControlElementsComponent } from './components/utils/control-elements/control-elements.component';
-import { VideoViewComponent } from './components/utils/video-view/video-view.component';
 import { ExploreComponent } from './components/pages/explore/explore.component';
 import { PreloadComponent } from './components/pages/import/preload/preload.component';
 
 const appRoutes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'import', component: ImportComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'import/preload', component: PreloadComponent }
-  
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    BottomButtonComponent,
     ImportComponent,
-    MainComponent,
-    ControlElementsComponent,
-    VideoViewComponent,
     ExploreComponent,
     PreloadComponent
   ],
@@ -45,11 +37,8 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    MatButtonModule,
-    MatCheckboxModule,
     RouterModule.forRoot(appRoutes, { useHash: true, relativeLinkResolution: 'legacy' }),
     HttpClientModule,
-    MatProgressSpinnerModule,
     MatProgressBarModule
   ],
   providers: [],
