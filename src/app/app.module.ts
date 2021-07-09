@@ -9,19 +9,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ExploreComponent } from './components/pages/explore/explore.component';
 
 const appRoutes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'import', loadChildren: () => import('./import/import.module').then(m => m.ImportModule) },
-  { path: 'explore', component: ExploreComponent },
-
+  { path: 'explore', loadChildren: () => import('./explore/explore.module').then(m => m.ExploreModule) },
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ExploreComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
