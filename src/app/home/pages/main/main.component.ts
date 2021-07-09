@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
-import { PlayerService } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
   }
 
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) { 
+  handleKeyboardEvent(event: KeyboardEvent) {
     if (this.skipKeyCodes.includes(event.keyCode)) {
       this.player.nextVideo();
     }

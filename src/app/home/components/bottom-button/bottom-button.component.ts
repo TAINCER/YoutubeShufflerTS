@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlayerService } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-bottom-button',
@@ -29,23 +29,23 @@ export class BottomButtonComponent {
 
   saveNewVideos(videos) {
     console.log(videos)
-/*
-    const regex = /https:\/\/www\.youtube\.com\/watch\?v=([-a-zA-Z0-9_!"$%]){11}/gm;
-    let m;
-
-    while ((m = regex.exec(videos)) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
+    /*
+        const regex = /https:\/\/www\.youtube\.com\/watch\?v=([-a-zA-Z0-9_!"$%]){11}/gm;
+        let m;
+    
+        while ((m = regex.exec(videos)) !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+            
+            // The result can be accessed through the `m`-variable.
+            m.forEach((match, groupIndex) => {
+                console.log(`Found match, group ${groupIndex}: ${match}`);
+            });
         }
-        
-        // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            console.log(`Found match, group ${groupIndex}: ${match}`);
-        });
-    }
-
-    console.log(m)
-*/
+    
+        console.log(m)
+    */
   }
 }
