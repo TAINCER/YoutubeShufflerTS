@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IVideo } from 'src/app/interfaces/IVideo';
+import { IVideo } from 'src/app/shared/interfaces/IVideo';
 import { InputReaderService } from 'src/app/shared/services/input-reader.service';
 import { PlayerService } from 'src/app/shared/services/player.service';
 

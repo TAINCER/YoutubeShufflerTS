@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IVideo } from '../../interfaces/IVideo';
+import { IVideo } from '../interfaces/IVideo';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IVideo } from '../../interfaces/IVideo';
-import { IPlayerConfig } from '../../interfaces/IPlayerConfig';
-import { INoEmbed } from '../../interfaces/INoEmbed';
+import { IVideo } from '../interfaces/IVideo';
+import { IPlayerConfig } from '../interfaces/IPlayerConfig';
+import { INoEmbed } from '../interfaces/INoEmbed';
 
 @Injectable({
   providedIn: 'root'
