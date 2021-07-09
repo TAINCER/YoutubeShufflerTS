@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
-import { IVideo } from 'src/app/interfaces/ivideo';
+import { IVideo } from 'src/app/interfaces/IVideo';
 import { InputReaderService } from 'src/app/services/input-reader.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class ExploreComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     window.resizeTo(1280, 720);
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'scroll';
-    
+
     this.allVideos = this.playerService.getVideosFromDisk();
     /**
     console.log();
@@ -38,7 +38,7 @@ export class ExploreComponent implements OnInit {
       
     }
      */
-    
+
   }
 
   setVideo(video: IVideo): void {

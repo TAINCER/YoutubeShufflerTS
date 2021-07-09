@@ -1,10 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { PlayerConfig } from '../interfaces/player-config';
 import { HttpClient } from '@angular/common/http';
-import { Noembed } from '../interfaces/noembed';
-import { IVideo } from '../interfaces/ivideo';
-
-
+import { IVideo } from '../interfaces/IVideo';
+import { IPlayerConfig } from '../interfaces/IPlayerConfig';
+import { INoEmbed } from '../interfaces/INoEmbed';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +10,7 @@ import { IVideo } from '../interfaces/ivideo';
 export class PlayerService {
   @Output() fire: EventEmitter<string> = new EventEmitter();
 
-  private config: PlayerConfig = {
+  private config: IPlayerConfig = {
     autoplay: false,
     loop: false
   };
@@ -48,17 +46,17 @@ export class PlayerService {
     return this.fire;
   }
 
-  public async getVideoInformation(videoId: string): Promise<Noembed> {
+  public async getVideoInformation(videoId: string): Promise<INoEmbed> {
     return await new Promise((resolve, reject) => {
-      this.httpClient.get<Noembed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
-      .subscribe(res => resolve(res) );
+      this.httpClient.get<INoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+        .subscribe(res => resolve(res));
     });
   }
 
   public setWindowTitle(title: string) {
     document.title = title;
   }
-  
+
   public getVideosFromDisk(): IVideo[] {
     if (localStorage.getItem('videos') === null) {
       return [];
@@ -76,7 +74,7 @@ export class PlayerService {
     this.fire.emit(this.currentVideo);
   }
 
-  public getConfig(): PlayerConfig {
+  public getConfig(): IPlayerConfig {
     return this.config;
   }
 

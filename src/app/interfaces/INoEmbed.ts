@@ -1,4 +1,4 @@
-export interface Noembed {
+export interface INoEmbed {
     provider_url: string;
     thumbnail_height: number;
     type: string;

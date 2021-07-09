@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InputReaderService } from 'src/app/services/input-reader.service';
-import { IVideo } from 'src/app/interfaces/ivideo';
+import { IVideo } from 'src/app/interfaces/IVideo';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,22 +29,22 @@ export class ImportComponent implements OnInit {
     const l: IVideo[] = [];
 
     while ((m = regex.exec(videos)) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
 
-        
-        // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            if (groupIndex === 0) {
-              l.push({
-                id: match.split('=')[match.split('=').length - 1],
-                thumbnail: null,
-                title: null
-              })
-            }
-        });
+
+      // The result can be accessed through the `m`-variable.
+      m.forEach((match, groupIndex) => {
+        if (groupIndex === 0) {
+          l.push({
+            id: match.split('=')[match.split('=').length - 1],
+            thumbnail: null,
+            title: null
+          })
+        }
+      });
     }
 
     this.inputReaderService.saveInput(l);
