@@ -27,8 +27,7 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
     this.videoPlayer = new Plyr('#player', {
       autoplay: false,
       muted: false,
-      loop: { active: false },
-      blankVideo: "https://cdn.plyr.io/static/blank.mp4"
+      loop: { active: false }
     });
 
     this.videoPlayer.once('ready', () => {
@@ -37,13 +36,13 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
         this.refreshPlayer();
         this.isPlayerReady = true
       }
-    })
+    });
 
     this.videoPlayer.on('ended', () => {
       if (this.playerService.getConfig().autoplay) {
         this.playerService.nextVideo();
       }
-    })
+    });
   }
 
   private refreshPlayer() {
