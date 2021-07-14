@@ -29,13 +29,13 @@ export class ExploreComponent implements OnInit {
     console.log();
     const videosToProcess: IVideo[] = this.allVideos.filter((v: IVideo) => v.thumbnail === null && v.title === null);
     console.log(videosToProcess.length);
-    
+
     for (let i = 0; i < videosToProcess.length; i++) {
       console.log(`Processing: ${videosToProcess[i].id}`);
-      
+
       await this.replaceVideoContent(await this.processVideo(videosToProcess[i]));
       console.log(`${videosToProcess[i].id} Done`);
-      
+
     }
      */
 

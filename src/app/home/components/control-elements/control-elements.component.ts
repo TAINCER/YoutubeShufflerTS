@@ -8,8 +8,8 @@ import { PlayerService } from '../../../shared/services/player.service';
 })
 export class ControlElementsComponent implements OnInit {
 
-  public video: string = '-';
-  public videoUrl: string = '';
+  public video = '-';
+  public videoUrl = '';
 
   public loop: boolean;
   public autoplay: boolean;
@@ -33,7 +33,7 @@ export class ControlElementsComponent implements OnInit {
   }
 
   open() {
-    window.open(this.videoUrl, "_blank")
+    window.open(this.videoUrl, '_blank')
   }
 
 }

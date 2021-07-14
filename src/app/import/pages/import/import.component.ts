@@ -19,7 +19,7 @@ export class ImportComponent implements OnInit {
   }
 
   saveNewVideos(videos) {
-    if (videos == "") {
+    if (videos === '') {
       return;
     }
 
