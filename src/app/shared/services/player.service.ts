@@ -40,7 +40,7 @@ export class PlayerService {
     this.fire.emit(video.id);
   }
 
-  public getVideoStream(): EventEmitter<string> {
+  public onVideoUpdate(): EventEmitter<string> {
     return this.fire;
   }
 
@@ -60,6 +60,10 @@ export class PlayerService {
     }
 
     return JSON.parse(localStorage.getItem('videos'));
+  }
+
+  public getCurrentVideo(): string {
+    return this.currentVideo;
   }
 
   public setConfig(autoplay: boolean, loop: boolean): void {
