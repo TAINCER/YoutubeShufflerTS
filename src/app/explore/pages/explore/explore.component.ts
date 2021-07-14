@@ -25,20 +25,6 @@ export class ExploreComponent implements OnInit {
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'scroll';
 
     this.allVideos = this.playerService.getVideosFromDisk();
-    /**
-    console.log();
-    const videosToProcess: IVideo[] = this.allVideos.filter((v: IVideo) => v.thumbnail === null && v.title === null);
-    console.log(videosToProcess.length);
-
-    for (let i = 0; i < videosToProcess.length; i++) {
-      console.log(`Processing: ${videosToProcess[i].id}`);
-
-      await this.replaceVideoContent(await this.processVideo(videosToProcess[i]));
-      console.log(`${videosToProcess[i].id} Done`);
-
-    }
-     */
-
   }
 
   setVideo(video: Video): void {
