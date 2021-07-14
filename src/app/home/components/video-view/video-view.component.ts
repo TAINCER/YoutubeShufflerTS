@@ -17,6 +17,12 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
     private playerService: PlayerService,
   ) { }
 
+  ngOnInit() {
+    this.playerService.onVideoUpdate().subscribe(() => {
+      this.refreshPlayer();
+    });
+  }
+
   ngAfterViewInit() {
     this.videoPlayer = new Plyr('#player', {
       autoplay: false,
@@ -38,12 +44,6 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
         this.playerService.nextVideo();
       }
     })
-  }
-
-  ngOnInit() {
-    this.playerService.onVideoUpdate().subscribe(() => {
-      this.refreshPlayer();
-    });
   }
 
   private refreshPlayer() {
