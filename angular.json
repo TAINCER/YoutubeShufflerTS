@@ -28,7 +28,8 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "./src/matStyle.scss",
+              "src/matStyle.scss",
+              "node_modules/plyr/src/sass/plyr.scss",
               "src/styles.scss"
             ],
             "scripts": [
