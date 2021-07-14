@@ -27,3 +27,7 @@ $candy-app-theme: mat.define-dark-theme($candy-app-primary, $candy-app-accent, $
 .mat-checkbox-checkmark-path {
     stroke: #e3e1de !important;
 }
+
+.mat-grid-tile-content {
+    display: block !important;
+}

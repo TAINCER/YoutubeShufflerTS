@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatButtonModule,
-    ClipboardModule
+    ClipboardModule,
+    MatGridListModule
   ]
 })
 export class HomeModule { }
