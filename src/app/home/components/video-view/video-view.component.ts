@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PlayerService } from 'src/app/shared/services/player.service';
-declare var Plyr: any;
+import * as Plyr from 'plyr';
 
 @Component({
   selector: 'app-video-view',
@@ -9,9 +9,9 @@ declare var Plyr: any;
 })
 export class VideoViewComponent implements OnInit, AfterViewInit {
 
-  private videoPlayer: any;
-  private isLoaded: boolean = false;
-  public loading: boolean = true;
+  private videoPlayer: Plyr;
+  private isPlayerReady = false;
+  public loading = true;
 
   constructor(
     private playerService: PlayerService,
@@ -19,15 +19,17 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.videoPlayer = new Plyr('#player', {
-      autoplay: true,
-      muted: true,
-      loop: { active: false }
+      autoplay: false,
+      muted: false,
+      loop: { active: false },
+      blankVideo: "https://cdn.plyr.io/static/blank.mp4"
     });
 
-    this.videoPlayer.on('ready', () => {
-      if (!this.isLoaded) {
-        this.isLoaded = true;
-        this.playerService.refresh();
+    this.videoPlayer.once('ready', () => {
+      if (!this.isPlayerReady) {
+        this.videoPlayer.autoplay = true;
+        this.refreshPlayer();
+        this.isPlayerReady = true
       }
     })
 
@@ -39,26 +41,29 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.playerService.getVideoStream().subscribe((video: string) => {
-
-      if (typeof (video) !== 'undefined') {
-        this.loading = false;
-
-        this.videoPlayer.loop = this.playerService.getConfig().loop;
-        this.videoPlayer.muted = false;
-
-        this.videoPlayer.source = {
-          type: 'video',
-          sources: [
-            {
-              src: video,
-              provider: 'youtube'
-            }
-          ]
-        };
-      }
-
+    this.playerService.onVideoUpdate().subscribe(() => {
+      this.refreshPlayer();
     });
+  }
+
+  private refreshPlayer() {
+    if (typeof (this.playerService.getCurrentVideo()) === 'undefined') {
+      return;
+    }
+
+    this.videoPlayer.loop = this.playerService.getConfig().loop;
+
+    this.videoPlayer.source = {
+      type: 'video',
+      sources: [
+        {
+          src: this.playerService.getCurrentVideo(),
+          provider: 'youtube'
+        }
+      ]
+    };
+
+    this.loading = false;
   }
 
 }
