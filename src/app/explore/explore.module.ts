@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ExploreRoutingModule } from './explore-routing.module';
 import { ExploreComponent } from './pages/explore/explore.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ExploreComponent } from './pages/explore/explore.component';
   ],
   imports: [
     CommonModule,
-    ExploreRoutingModule
+    ExploreRoutingModule,
+    MatTableModule,
+    MatInputModule
   ]
 })
 export class ExploreModule { }
