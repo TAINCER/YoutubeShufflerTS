@@ -32,7 +32,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/plyr.min.js"
+              "node_modules/plyr/dist/plyr.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -108,9 +108,7 @@
               "./src/matStyle.scss",
               "src/styles.scss"
             ],
-            "scripts": [
-              "src/assets/plyr.min.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {

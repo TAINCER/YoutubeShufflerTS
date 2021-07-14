@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
-@import url("assets/plyr.css");
+@import url("../node_modules/plyr/dist/plyr.css");
 
 html,
 body {
@@ -9,8 +9,8 @@ body {
 }
 
 body {
-    margin          : 0;
-    font-family     : Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #171e22;
 }
 
@@ -21,6 +21,10 @@ h4,
 p,
 span {
     color: #ffff;
+}
+
+.plyr__control span {
+    color: #4a5464 !important;
 }
 
 button:active,
