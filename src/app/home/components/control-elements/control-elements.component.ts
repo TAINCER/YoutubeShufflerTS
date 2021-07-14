@@ -9,7 +9,7 @@ import { PlayerService } from '../../../shared/services/player.service';
 export class ControlElementsComponent implements OnInit {
 
   public video: string = '-';
-  private videoUrl: string = '';
+  public videoUrl: string = '';
 
   constructor(
     private player: PlayerService
@@ -17,25 +17,13 @@ export class ControlElementsComponent implements OnInit {
 
   ngOnInit() {
     this.video = this.player.getVideosFromDisk().length + ' Videos has been Loaded! ';
-    this.player.getVideoStream().subscribe((video: string) => {
+    this.player.onVideoUpdate().subscribe((video: string) => {
       this.videoUrl = 'https://www.youtube.com/watch?v=' + video;
     });
   }
 
   updatePlayerConfig(isAutoplay: boolean, isLoop: boolean): void {
     this.player.setConfig(isAutoplay, isLoop);
-  }
-
-  copyUrl() {
-
-    var el: any = document.createElement('textarea');
-    el.value = this.videoUrl;
-    el.setAttribute('readonly', '');
-    el.style = { position: 'absolute', left: '-9999px' };
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
   }
 
   open() {

@@ -5,7 +5,7 @@
 </div>
 <div class="buttons">
     <p></p>
-    <button (click)="copyUrl()" class="centerButton" mat-raised-button color="accent">Copy URL</button>
+    <button [cdkCopyToClipboard]="videoUrl" class="centerButton" mat-raised-button color="accent">Copy URL</button>
     <button (click)="open()" class="centerButton" mat-raised-button color="accent">Open in Browser</button>
 
 </div>

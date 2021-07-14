@@ -9,6 +9,7 @@ import { MainComponent } from './pages/main/main.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
     HomeRoutingModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    ClipboardModule
   ]
 })
 export class HomeModule { }
