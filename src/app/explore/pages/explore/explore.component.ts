@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { PlayerService } from 'src/app/services/player.service';
-import { IVideo } from 'src/app/interfaces/ivideo';
-import { InputReaderService } from 'src/app/services/input-reader.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
+import { Video } from 'src/app/shared/interfaces/Video';
+import { InputReaderService } from 'src/app/shared/services/input-reader.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ExploreComponent implements OnInit {
 
-  allVideos: IVideo[];
+  allVideos: Video[];
 
   constructor(
     private playerService: PlayerService,
@@ -23,7 +23,7 @@ export class ExploreComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     window.resizeTo(1280, 720);
     this.elRef.nativeElement.ownerDocument.body.style.overflow = 'scroll';
-    
+
     this.allVideos = this.playerService.getVideosFromDisk();
     /**
     console.log();
@@ -38,15 +38,15 @@ export class ExploreComponent implements OnInit {
       
     }
      */
-    
+
   }
 
-  setVideo(video: IVideo): void {
+  setVideo(video: Video): void {
     this.playerService.setVideo(video);
     this.router.navigate(['/']);
   }
 
-  async replaceVideoContent(video: IVideo): Promise<void> {
+  async replaceVideoContent(video: Video): Promise<void> {
     for (let i = 0; i < this.allVideos.length; i++) {
       if (this.allVideos[i].id === video.id) {
         this.allVideos[i] = video;
@@ -56,7 +56,7 @@ export class ExploreComponent implements OnInit {
     }
   }
 
-  async processVideo(video: IVideo): Promise<IVideo> {
+  async processVideo(video: Video): Promise<Video> {
     const result = await this.playerService.getVideoInformation(video.id);
     return {
       id: video.id,

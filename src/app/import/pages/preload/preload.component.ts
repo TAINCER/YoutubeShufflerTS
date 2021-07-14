@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IVideo } from 'src/app/interfaces/ivideo';
-import { InputReaderService } from 'src/app/services/input-reader.service';
-import { PlayerService } from 'src/app/services/player.service';
+import { Video } from 'src/app/shared/interfaces/Video';
+import { InputReaderService } from 'src/app/shared/services/input-reader.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-preload',
@@ -18,9 +18,9 @@ export class PreloadComponent implements OnInit {
   ) { }
 
   processValue = 0;
-  lastVideo: IVideo;
+  lastVideo: Video;
 
-  private allVideos: IVideo[] = [];
+  private allVideos: Video[] = [];
 
   async ngOnInit(): Promise<void> {
     this.allVideos = this.playerService.getVideosFromDisk();
@@ -36,7 +36,7 @@ export class PreloadComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  async replaceVideoContent(video: IVideo): Promise<void> {
+  async replaceVideoContent(video: Video): Promise<void> {
     for (let i = 0; i < this.allVideos.length; i++) {
       if (this.allVideos[i].id === video.id) {
         this.allVideos[i] = video;
@@ -46,7 +46,7 @@ export class PreloadComponent implements OnInit {
     }
   }
 
-  async processVideo(video: IVideo): Promise<IVideo> {
+  async processVideo(video: Video): Promise<Video> {
     const result = await this.playerService.getVideoInformation(video.id);
     return {
       id: video.id,

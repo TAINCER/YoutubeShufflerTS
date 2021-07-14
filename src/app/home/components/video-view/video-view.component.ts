@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { PlayerService } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
 declare var Plyr: any;
 
 @Component({
@@ -46,7 +46,7 @@ export class VideoViewComponent implements OnInit, AfterViewInit {
 
         this.videoPlayer.loop = this.playerService.getConfig().loop;
         this.videoPlayer.muted = false;
-        
+
         this.videoPlayer.source = {
           type: 'video',
           sources: [

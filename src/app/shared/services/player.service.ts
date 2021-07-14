@@ -1,10 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { PlayerConfig } from '../interfaces/player-config';
 import { HttpClient } from '@angular/common/http';
-import { Noembed } from '../interfaces/noembed';
-import { IVideo } from '../interfaces/ivideo';
-
-
+import { Video } from '../interfaces/Video';
+import { PlayerConfig } from '../interfaces/PlayerConfig';
+import { NoEmbed } from '../interfaces/NoEmbed';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +10,18 @@ import { IVideo } from '../interfaces/ivideo';
 export class PlayerService {
   @Output() fire: EventEmitter<string> = new EventEmitter();
 
+  private currentVideo: string;
   private config: PlayerConfig = {
     autoplay: false,
     loop: false
   };
 
-  private currentVideo: string;
-
   constructor(
     private httpClient: HttpClient
   ) { }
 
-
   public async nextVideo() {
-    const localVideos: IVideo[] = this.getVideosFromDisk();
+    const localVideos: Video[] = this.getVideosFromDisk();
     const video: string = localVideos[this.getRandomInt(0, localVideos.length)].id;
 
     this.setWindowTitle((await this.getVideoInformation(video)).title);
@@ -38,7 +34,7 @@ export class PlayerService {
     this.fire.emit(this.currentVideo);
   }
 
-  public setVideo(video: IVideo) {
+  public setVideo(video: Video) {
     this.setWindowTitle(video.title);
     this.currentVideo = video.id;
     this.fire.emit(video.id);
@@ -48,18 +44,17 @@ export class PlayerService {
     return this.fire;
   }
 
-  public async getVideoInformation(videoId: string): Promise<Noembed> {
-    return await new Promise((resolve, reject) => {
-      this.httpClient.get<Noembed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
-      .subscribe(res => resolve(res) );
-    });
+  public async getVideoInformation(videoId: string): Promise<NoEmbed> {
+    return await this.httpClient
+      .get<NoEmbed>(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+      .toPromise();
   }
 
   public setWindowTitle(title: string) {
     document.title = title;
   }
-  
-  public getVideosFromDisk(): IVideo[] {
+
+  public getVideosFromDisk(): Video[] {
     if (localStorage.getItem('videos') === null) {
       return [];
     }
