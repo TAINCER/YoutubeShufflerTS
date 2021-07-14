@@ -8,9 +8,9 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 })
 export class MainComponent implements OnInit {
 
-  private skipKeyCodes = [
-    13,
-    32
+  private skipKeys = [
+    'Enter',
+    ' '
   ];
 
   constructor(
@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (this.skipKeyCodes.includes(event.keyCode)) {
+    if (this.skipKeys.includes(event.key)) {
       this.player.nextVideo();
     }
   }
