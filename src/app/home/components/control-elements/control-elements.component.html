@@ -1,7 +1,7 @@
 <div class="marginleft">
     <p>{{ video }}</p>
-    <mat-checkbox #autoplay (change)="updatePlayerConfig(autoplay.checked, loop.checked)">Autoplay</mat-checkbox><br>
-    <mat-checkbox #loop (change)="updatePlayerConfig(autoplay.checked, loop.checked)">Loop</mat-checkbox>
+    <mat-checkbox [checked]="autoplay" (change)="autoplay = !autoplay; updatePlayerConfig()">Autoplay</mat-checkbox><br>
+    <mat-checkbox [checked]="loop" (change)="loop = !loop; updatePlayerConfig()">Loop</mat-checkbox>
 </div>
 <div class="buttons">
     <p></p>

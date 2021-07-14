@@ -11,19 +11,25 @@ export class ControlElementsComponent implements OnInit {
   public video: string = '-';
   public videoUrl: string = '';
 
+  public loop: boolean;
+  public autoplay: boolean;
+
   constructor(
     private player: PlayerService
   ) { }
 
   ngOnInit() {
+    this.loop = this.player.getConfig().loop;
+    this.autoplay = this.player.getConfig().autoplay;
+
     this.video = this.player.getVideosFromDisk().length + ' Videos has been Loaded! ';
     this.player.onVideoUpdate().subscribe((video: string) => {
       this.videoUrl = 'https://www.youtube.com/watch?v=' + video;
     });
   }
 
-  updatePlayerConfig(isAutoplay: boolean, isLoop: boolean): void {
-    this.player.setConfig(isAutoplay, isLoop);
+  updatePlayerConfig(): void {
+    this.player.setConfig(this.autoplay, this.loop);
   }
 
   open() {
